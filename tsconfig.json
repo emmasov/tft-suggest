@@ -6,7 +6,6 @@
     "module": "esnext",
     "target": "es6",
     "lib": [
-      /* Specify library files to be included in the compilation:  */
       "esnext",
       "dom",
       "es6",
@@ -14,7 +13,7 @@
     ],
     "sourceMap": true,
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -25,7 +24,13 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "exclude": [
     "node_modules",
@@ -40,5 +45,8 @@
     "src/setupTests.ts",
     "src/**/*.js",
     "src/**/*/*.blob.ts"
+  ],
+  "include": [
+    "src"
   ]
 }
