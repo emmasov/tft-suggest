@@ -1,11 +1,9 @@
 import * as React from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./TftSuggest.css";
 
-function App() {
-  if (1) {
-    return null;
-  }
+function TftSuggest() {
+  console.log(logo);
 
   return (
     <div className="App">
@@ -27,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default TftSuggest;
