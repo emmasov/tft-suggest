@@ -1,0 +1,46 @@
+{
+  "extends": ["prettier"],
+  "plugins": ["@typescript-eslint", "prettier", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "mocha": true
+  },
+  "globals": {
+    "cy": true,
+    "Cypress": true,
+    "google": true,
+    "FS": true
+  },
+  "rules": {
+    "no-debugger": "warn",
+    "curly": ["warn", "all"],
+    "no-alert": "error",
+    "no-unused-expressions": "warn",
+    "no-lonely-if": "warn",
+    "prefer-const": "warn",
+    "no-eval": "error",
+    "no-sparse-arrays": "error",
+    "no-var": "error",
+    "prettier/prettier": "warn",
+    "no-func-assign": "error",
+    "object-shorthand": "warn",
+    "no-console": ["warn", { "allow": ["error", "warn"] }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/array-type": ["warn", "array-simple"],
+    "@typescript-eslint/ban-types": "error"
+  }
+}

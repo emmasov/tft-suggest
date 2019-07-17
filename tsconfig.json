@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": "src",
+    "outDir": "build/",
+    "module": "esnext",
+    "target": "es6",
+    "lib": [
+      /* Specify library files to be included in the compilation:  */
+      "esnext",
+      "dom",
+      "es6",
+      "es2017.object"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "cypress",
+    "webpack",
+    "config",
+    "coverage",
+    "jest",
+    "src/setupTests.ts",
+    "src/**/*.js",
+    "src/**/*/*.blob.ts"
+  ]
+}
