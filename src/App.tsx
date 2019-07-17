@@ -3,7 +3,9 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  if (1) return null;
+  if (1) {
+    return null;
+  }
 
   return (
     <div className="App">
