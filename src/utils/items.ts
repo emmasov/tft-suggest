@@ -4,6 +4,7 @@ interface ItemComponent {
   buildsInto: Set<ItemFinishedId>;
   itemType: ItemType.COMPONENT;
   stats: ItemStats;
+  gridIndex: number;
 }
 
 interface ItemFinished {
@@ -80,7 +81,7 @@ export enum ItemComponentId {
   TEAR_OF_THE_GODDESS = "tear_of_the_goddess"
 }
 
-export const ITEM_COMPONENTS_MASTER_LIST: Record<
+export const ITEM_COMPONENTS_MASTER_RECORD: Record<
   ItemComponentId,
   ItemComponent
 > = {
@@ -106,7 +107,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 0
   },
   [ItemComponentId.NEEDLESSLY_LARGE_ROD]: {
     id: ItemComponentId.NEEDLESSLY_LARGE_ROD,
@@ -130,7 +132,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 0,
       spellDamage: 20
-    }
+    },
+    gridIndex: 1
   },
   [ItemComponentId.RECURVE_BOW]: {
     id: ItemComponentId.RECURVE_BOW,
@@ -154,7 +157,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 2
   },
   [ItemComponentId.TEAR_OF_THE_GODDESS]: {
     id: ItemComponentId.TEAR_OF_THE_GODDESS,
@@ -178,7 +182,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 20,
       spellDamage: 0
-    }
+    },
+    gridIndex: 3
   },
   [ItemComponentId.CHAIN_VEST]: {
     id: ItemComponentId.CHAIN_VEST,
@@ -202,7 +207,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 4
   },
   [ItemComponentId.NEGATRON_CLOAK]: {
     id: ItemComponentId.NEGATRON_CLOAK,
@@ -226,7 +232,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 20,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 5
   },
   [ItemComponentId.GIANTS_BELT]: {
     id: ItemComponentId.GIANTS_BELT,
@@ -250,7 +257,8 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 20,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 6
   },
   [ItemComponentId.SPATULA]: {
     id: ItemComponentId.SPATULA,
@@ -274,11 +282,12 @@ export const ITEM_COMPONENTS_MASTER_LIST: Record<
       magicResist: 0,
       mana: 0,
       spellDamage: 0
-    }
+    },
+    gridIndex: 7
   }
 };
 
-export const FINISHED_ITEMS_MASTER_LIST: Record<
+export const FINISHED_ITEMS_MASTER_RECORD: Record<
   ItemFinishedId,
   ItemFinished
 > = {
@@ -911,4 +920,67 @@ export const FINISHED_ITEMS_MASTER_LIST: Record<
       spellDamage: 0
     }
   }
+};
+
+export const FINISHED_ITEMS_MASTER_LIST = Object.values(
+  FINISHED_ITEMS_MASTER_RECORD
+);
+
+export const ITEM_COMPONENTS_MASTER_LIST = Object.values(
+  ITEM_COMPONENTS_MASTER_RECORD
+);
+
+interface FinishedItemPossiblity {
+  otherIngredient: ItemComponentId;
+  finishedItem: ItemFinishedId;
+}
+
+/** Assume finished items build only from two components. */
+const getPossibleCompletedItemsFromSingleComponents = (
+  itemComponent: ItemComponentId
+): FinishedItemPossiblity[] => {
+  return FINISHED_ITEMS_MASTER_LIST.filter(finishedItem =>
+    finishedItem.buildsFrom[0].includes(itemComponent)
+  ).map(
+    (possibleFinishedItem): FinishedItemPossiblity => {
+      const indexOfItemComponent = possibleFinishedItem.buildsFrom[0].indexOf(
+        itemComponent
+      );
+      const indexOfOtherIngredient = indexOfItemComponent === 0 ? 1 : 0;
+
+      return {
+        finishedItem: possibleFinishedItem.id,
+        otherIngredient:
+          possibleFinishedItem.buildsFrom[0][indexOfOtherIngredient]
+      };
+    }
+  );
+};
+
+export const FINISHED_ITEMS_MASTER_RECORD_KEYED_BY_COMPONENT = ITEM_COMPONENTS_MASTER_LIST.reduce(
+  (acc, cur) => {
+    acc[cur.id] = getPossibleCompletedItemsFromSingleComponents(cur.id);
+
+    return acc;
+  },
+  {}
+) as Record<ItemComponentId, FinishedItemPossiblity[]>;
+
+export const getCompletedItemFromComponents = (
+  componentA: ItemComponentId,
+  componentB: ItemComponentId
+) => {
+  const possibilities =
+    FINISHED_ITEMS_MASTER_RECORD_KEYED_BY_COMPONENT[componentA];
+  const possibleFinishedItemWithSecondComponent = possibilities.find(
+    el => el.otherIngredient === componentB
+  );
+
+  if (!possibleFinishedItemWithSecondComponent) {
+    throw new Error(
+      `Unable to find a possible finished item with the following components: [${componentA}, ${componentB}]`
+    );
+  }
+
+  return possibleFinishedItemWithSecondComponent;
 };

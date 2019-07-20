@@ -1,38 +1,32 @@
 import * as React from "react";
-import "./App.css";
-import ItemComponentSelect from "./ItemComponentSelect";
-import { ItemComponentId, ITEM_COMPONENTS_MASTER_LIST } from "utils/items";
-import { DropdownOption } from "types";
-
-// const useForceUpdate = React.useReducer(x => x + 1, 0)[1];
+import { ItemComponentId } from "utils/items";
+import { generatePossibleCompletedItems } from "utils/suggestions";
+import "./App.scss";
+import { ItemIcon } from "./ItemIcon/ItemIcon";
+import ItemComponentPicker from "./ItemComponentPicker.tsx/ItemComponentPicker";
 
 function App() {
   const [
     itemComponentsInInventory,
     setItemComponentsInInventory
   ] = React.useState<ItemComponentId[]>([]);
-  const itemComponents = Object.values(ITEM_COMPONENTS_MASTER_LIST);
+
+  const possibleCompletedItems = generatePossibleCompletedItems(
+    itemComponentsInInventory
+  );
 
   return (
     <main>
-      <h1>TFT Suggest</h1>
-      {itemComponentsInInventory.length && (
-        <ul>
-          {itemComponentsInInventory.map(itemComponentId => {
-            return (
-              <li>{ITEM_COMPONENTS_MASTER_LIST[itemComponentId].label}</li>
-            );
-          })}
-        </ul>
-      )}
-      <ItemComponentSelect
+      <h1>TFT Combinatorics</h1>
+      {/* <ItemComponentSelect
         selectedItems={itemComponentsInInventory}
         onAddItemComponent={addedItemComponentId =>
           setItemComponentsInInventory(prevSelections =>
             prevSelections.concat(addedItemComponentId)
           )
         }
-      ></ItemComponentSelect>
+      ></ItemComponentSelect> */}
+      <ItemComponentPicker></ItemComponentPicker>
     </main>
   );
 }
