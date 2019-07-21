@@ -80,7 +80,6 @@ export const ItemIcon: React.FC<
         backgroundImage={`url(${
           ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
         })`}
-        disabled={!requiredComponentsInInventory}
         shouldShowItemCount={
           props.shouldShowItemCount === undefined
             ? countOfItemInInventory
@@ -90,11 +89,7 @@ export const ItemIcon: React.FC<
         }
         countOfItemInInventory={countOfItemInInventory}
         onClick={() => {
-          if (
-            props.onItemFinishedClick &&
-            props.itemFinishedId &&
-            requiredComponentsInInventory
-          ) {
+          if (props.onItemFinishedClick && props.itemFinishedId) {
             props.onItemFinishedClick!(props.itemFinishedId);
           }
         }}
@@ -116,7 +111,7 @@ export const ItemIcon: React.FC<
       shouldShowItemCount={
         props.shouldShowItemCount === undefined
           ? countOfItemInInventory
-            ? countOfItemInInventory > 0
+            ? countOfItemInInventory !== 0
             : false
           : props.shouldShowItemCount
       }

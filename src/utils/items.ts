@@ -977,13 +977,11 @@ export const removeItemFromInventory = <
   inventory: Inventory<T>,
   itemToRemove: T
 ): Inventory<T> => {
-  if (!inventory.hasOwnProperty(itemToRemove)) {
-    return inventory;
-  }
-
   return {
     ...inventory,
-    [itemToRemove]: Math.max(inventory[itemToRemove]! - 1, 0)
+    [itemToRemove]: inventory.hasOwnProperty(itemToRemove)
+      ? inventory[itemToRemove]! - 1
+      : -1
   };
 };
 
