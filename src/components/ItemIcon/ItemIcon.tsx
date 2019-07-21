@@ -18,13 +18,13 @@ interface BaseProps {
   itemComponentId?: ItemComponentId;
   itemFinishedId?: ItemFinishedId;
   htmlProps?: React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
   >;
-  shouldShowItemCount?: boolean;
   isBlank?: true;
   disabled?: boolean;
   grayedOut?: boolean;
+  shouldShowItemCount?: boolean;
   onItemComponentClick?: (item: ItemComponentId) => void;
   onItemFinishedClick?: (item: ItemFinishedId) => void;
 }
@@ -46,12 +46,11 @@ interface ItemFinishedIconProps extends BaseProps {
 export const ItemIcon: React.FC<
   ItemComponentProps | BlankIconProps | ItemFinishedIconProps
 > = props => {
-  const { shouldShowItemCount = true } = props;
   const [inventoryState, inventoryDispatch] = useInventory();
 
   if (props.isBlank) {
     return (
-      <div
+      <button
         className={"ItemIcon"}
         {...props.htmlProps}
         style={{
@@ -59,7 +58,7 @@ export const ItemIcon: React.FC<
           visibility: "hidden",
           opacity: props.grayedOut ? 0.5 : 1
         }}
-      ></div>
+      ></button>
     );
   }
 
@@ -72,15 +71,23 @@ export const ItemIcon: React.FC<
       props.itemFinishedId
     );
 
-    const shouldBeGrayedOut =
-      props.grayedOut ||
-      (!requiredComponentsInInventory && !countOfItemInInventory);
+    const shouldBeGrayedOut = props.grayedOut || !requiredComponentsInInventory;
 
     return (
-      <div
-        className={"ItemIcon"}
-        {...props.htmlProps}
-        data-disabled={shouldBeGrayedOut || !requiredComponentsInInventory}
+      <IconButtonBase
+        {...props}
+        grayedOut={shouldBeGrayedOut}
+        backgroundImage={`url(${
+          ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
+        })`}
+        shouldShowItemCount={
+          props.shouldShowItemCount === undefined
+            ? countOfItemInInventory
+              ? countOfItemInInventory > 0
+              : false
+            : props.shouldShowItemCount
+        }
+        countOfItemInInventory={countOfItemInInventory}
         onClick={() => {
           if (
             props.onItemFinishedClick &&
@@ -90,19 +97,7 @@ export const ItemIcon: React.FC<
             props.onItemFinishedClick!(props.itemFinishedId);
           }
         }}
-        style={{
-          backgroundImage: `url(${
-            ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
-          })`,
-          opacity:
-            shouldBeGrayedOut || !requiredComponentsInInventory ? 0.5 : 1,
-          ...(props.htmlProps ? props.htmlProps.style : {})
-        }}
-      >
-        {shouldShowItemCount && !shouldBeGrayedOut && (
-          <ItemCountDisplay count={countOfItemInInventory}></ItemCountDisplay>
-        )}
-      </div>
+      ></IconButtonBase>
     );
   }
 
@@ -110,29 +105,55 @@ export const ItemIcon: React.FC<
     inventoryState.itemComponentsInInventory[props.itemComponentId];
 
   return (
-    <div
-      className={"ItemIcon"}
-      {...props.htmlProps}
-      data-disabled={props.grayedOut}
+    <IconButtonBase
+      {...props}
+      backgroundImage={`url(${
+        ITEM_COMPONENT_ID_TO_ICON_MAP[props.itemComponentId]
+      })`}
+      shouldShowItemCount={
+        props.shouldShowItemCount === undefined
+          ? countOfItemInInventory
+            ? countOfItemInInventory > 0
+            : false
+          : props.shouldShowItemCount
+      }
+      countOfItemInInventory={countOfItemInInventory}
       onClick={() => {
         if (props.onItemComponentClick && props.itemComponentId) {
           props.onItemComponentClick!(props.itemComponentId);
         }
       }}
+    ></IconButtonBase>
+  );
+};
+
+interface IconBaseProps {
+  disabled?: boolean;
+  backgroundImage: string;
+  countOfItemInInventory: number | undefined;
+
+  onClick: () => void;
+}
+
+const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
+  return (
+    <button
+      className={"ItemIcon"}
+      {...props.htmlProps}
+      disabled={props.disabled}
+      onClick={props.onClick}
       style={{
-        backgroundImage: `url(${
-          ITEM_COMPONENT_ID_TO_ICON_MAP[props.itemComponentId]
-        })`,
+        backgroundImage: props.backgroundImage,
         opacity: props.grayedOut ? 0.5 : 1,
         ...(props.htmlProps ? props.htmlProps.style : {})
       }}
     >
-      {shouldShowItemCount && !props.grayedOut && (
+      {props.shouldShowItemCount && (
         <ItemCountDisplay
-          count={countOfItemInInventory || 0}
+          count={props.countOfItemInInventory || 0}
         ></ItemCountDisplay>
       )}
-    </div>
+    </button>
   );
 };
 
@@ -141,7 +162,7 @@ interface ItemCountDisplayProps {
 }
 
 const ItemCountDisplay: React.FC<ItemCountDisplayProps> = props => {
-  if (props.count === undefined) {
+  if (!props.count) {
     return null;
   }
 
