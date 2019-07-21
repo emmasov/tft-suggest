@@ -1,42 +1,66 @@
 import * as React from "react";
-import {
-  ItemComponentId,
-  ItemFinishedId,
-  addItemToInventory
-} from "utils/items";
-import { generatePossibleCompletedItems } from "utils/suggestions";
 import "./App.scss";
-import { ItemIcon } from "./ItemIcon/ItemIcon";
-import ItemComponentPicker from "./ItemComponentPicker.tsx/ItemComponentPicker";
-import { Inventory } from "types";
-import InventoryProvider, {
-  useInventory
-} from "./InventoryProvider/InventoryProvider";
 import Button from "./Button/Button";
-import { clearInventoryAction } from "./InventoryProvider/reducer";
+import { useInventory } from "./InventoryProvider/InventoryProvider";
+import {
+  clearInventoryAction,
+  undoLastInventoryAction
+} from "./InventoryProvider/reducer";
+import ItemComponentPicker from "./ItemComponentPicker.tsx/ItemComponentPicker";
+import { buildPublicUrl } from "utils/misc";
+import Layout from "./Layout/Layout";
 
 const AppLayout: React.FC = () => {
   const [state, dispatch] = useInventory();
 
   return (
     <main>
-      <h1 style={{ textAlign: "center" }}>TFT Combinatorics</h1>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column"
-        }}
-      >
+      <Layout>
+        <h1 style={{ textAlign: "center" }}>TFT Combinatorics</h1>
         <div
           style={{
-            marginBottom: 15
+            marginBottom: 15,
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between"
           }}
         >
-          <Button onClick={() => dispatch(clearInventoryAction)}>Reset</Button>
+          <Button
+            aria-label="Undo Button"
+            onClick={() => dispatch(undoLastInventoryAction)}
+            disabled={state.inventoryHistory.length < 1}
+          >
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center"
+              }}
+            >
+              <img
+                src={buildPublicUrl("assets/undo.svg")}
+                alt="Undo"
+                style={{
+                  marginRight: 8,
+                  height: 15
+                }}
+              />
+              Undo
+            </span>
+          </Button>
+          <Button
+            aria-label="Reset"
+            onClick={() => dispatch(clearInventoryAction)}
+          >
+            Reset
+          </Button>
         </div>
         <ItemComponentPicker></ItemComponentPicker>
-      </div>
+        <div
+          style={{
+            marginTop: 15
+          }}
+        ></div>
+      </Layout>
     </main>
   );
 };

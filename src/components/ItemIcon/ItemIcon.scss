@@ -1,5 +1,5 @@
 .ItemIcon {
-  display: "inline-block";
+  display: inline-block;
   height: 64px;
   width: 64px;
   position: relative;
@@ -16,6 +16,7 @@
 
 .ItemCountDisplay {
   position: absolute;
+  font-size: 16px;
   height: 24px;
   width: 24px;
   background: black;
@@ -34,6 +35,7 @@
   }
 
   .ItemCountDisplay {
+    font-size: 14px;
     height: 18px;
     width: 18px;
   }
@@ -46,6 +48,7 @@
   }
 
   .ItemCountDisplay {
+    font-size: 12px;
     height: 16px;
     width: 16px;
   }

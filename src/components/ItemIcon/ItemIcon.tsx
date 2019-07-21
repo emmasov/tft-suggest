@@ -18,8 +18,8 @@ interface BaseProps {
   itemComponentId?: ItemComponentId;
   itemFinishedId?: ItemFinishedId;
   htmlProps?: React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
   >;
   shouldShowItemCount?: boolean;
   isBlank?: true;
@@ -51,7 +51,7 @@ export const ItemIcon: React.FC<
 
   if (props.isBlank) {
     return (
-      <button
+      <div
         className={"ItemIcon"}
         {...props.htmlProps}
         style={{
@@ -59,7 +59,7 @@ export const ItemIcon: React.FC<
           visibility: "hidden",
           opacity: props.grayedOut ? 0.5 : 1
         }}
-      ></button>
+      ></div>
     );
   }
 
@@ -77,10 +77,10 @@ export const ItemIcon: React.FC<
       (!requiredComponentsInInventory && !countOfItemInInventory);
 
     return (
-      <button
+      <div
         className={"ItemIcon"}
         {...props.htmlProps}
-        disabled={shouldBeGrayedOut || !requiredComponentsInInventory}
+        data-disabled={shouldBeGrayedOut || !requiredComponentsInInventory}
         onClick={() => {
           if (
             props.onItemFinishedClick &&
@@ -102,7 +102,7 @@ export const ItemIcon: React.FC<
         {shouldShowItemCount && !shouldBeGrayedOut && (
           <ItemCountDisplay count={countOfItemInInventory}></ItemCountDisplay>
         )}
-      </button>
+      </div>
     );
   }
 
@@ -110,10 +110,10 @@ export const ItemIcon: React.FC<
     inventoryState.itemComponentsInInventory[props.itemComponentId];
 
   return (
-    <button
+    <div
       className={"ItemIcon"}
       {...props.htmlProps}
-      disabled={props.grayedOut}
+      data-disabled={props.grayedOut}
       onClick={() => {
         if (props.onItemComponentClick && props.itemComponentId) {
           props.onItemComponentClick!(props.itemComponentId);
@@ -132,7 +132,7 @@ export const ItemIcon: React.FC<
           count={countOfItemInInventory || 0}
         ></ItemCountDisplay>
       )}
-    </button>
+    </div>
   );
 };
 

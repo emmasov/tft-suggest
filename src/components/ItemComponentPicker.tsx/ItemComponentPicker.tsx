@@ -102,7 +102,7 @@ const ResultantRow: React.FC<{
         const finishedIconAlreadyRendered = index < props.rowIndex;
 
         return finishedIconAlreadyRendered ? (
-          <ItemIcon isBlank></ItemIcon>
+          <ItemIcon key={index} isBlank></ItemIcon>
         ) : (
           <ItemIcon
             itemFinishedId={finishedItem}
