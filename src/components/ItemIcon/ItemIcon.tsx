@@ -94,7 +94,8 @@ export const ItemIcon: React.FC<
           backgroundImage: `url(${
             ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
           })`,
-          opacity: shouldBeGrayedOut ? 0.5 : 1,
+          opacity:
+            shouldBeGrayedOut || !requiredComponentsInInventory ? 0.5 : 1,
           ...(props.htmlProps ? props.htmlProps.style : {})
         }}
       >

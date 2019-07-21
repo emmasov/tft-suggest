@@ -4,6 +4,14 @@
   width: 64px;
   position: relative;
   background-size: contain;
+  border: 0;
+  box-shadow: inset 0 0 3px yellow;
+
+  &:not(:disabled) {
+    &:hover {
+      box-shadow: inset 0 0 10px yellow;
+    }
+  }
 }
 
 .ItemCountDisplay {
