@@ -14,6 +14,9 @@ type ADD_ITEM_TO_INVENTORY = typeof ADD_ITEM_TO_INVENTORY;
 const REMOVE_ITEM_FROM_INVENTORY = "REMOVE_ITEM_FROM_INVENTORY";
 type REMOVE_ITEM_FROM_INVENTORY = typeof REMOVE_ITEM_FROM_INVENTORY;
 
+const CLEAR_INVENTORY = "CLEAR_INVENTORY";
+type CLEAR_INVENTORY = typeof CLEAR_INVENTORY;
+
 export interface ActionAddItemToInventory {
   type: ADD_ITEM_TO_INVENTORY;
   inventorySlot: keyof InventorySlots;
@@ -26,9 +29,14 @@ export interface ActionRemoveItemFromInventory {
   item: ItemComponentId | ItemFinishedId;
 }
 
+export interface ActionClearInventory {
+  type: CLEAR_INVENTORY;
+}
+
 export type InventoryAction =
   | ActionAddItemToInventory
-  | ActionRemoveItemFromInventory;
+  | ActionRemoveItemFromInventory
+  | ActionClearInventory;
 
 interface InventorySlots {
   itemComponentsInInventory: Inventory<ItemComponentId>;
@@ -64,8 +72,6 @@ export const inventoryReducer = (
         return removeItemFromInventory(acc, cur);
       }, state.itemComponentsInInventory);
 
-      console.log(action.inventorySlot);
-
       return {
         ...state,
         itemComponentsInInventory: { ...newComponentInventory },
@@ -82,6 +88,8 @@ export const inventoryReducer = (
           action.item
         )
       };
+    case CLEAR_INVENTORY:
+      return initialInventoryState;
     default:
       return state;
   }
@@ -107,4 +115,8 @@ export const createRemoveItemFromInventoryAction = (
     inventorySlot,
     item
   };
+};
+
+export const clearInventoryAction: ActionClearInventory = {
+  type: CLEAR_INVENTORY
 };

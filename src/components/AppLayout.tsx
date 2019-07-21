@@ -12,9 +12,11 @@ import { Inventory } from "types";
 import InventoryProvider, {
   useInventory
 } from "./InventoryProvider/InventoryProvider";
+import Button from "./Button/Button";
+import { clearInventoryAction } from "./InventoryProvider/reducer";
 
 const AppLayout: React.FC = () => {
-  const [state] = useInventory();
+  const [state, dispatch] = useInventory();
 
   return (
     <main>
@@ -22,9 +24,17 @@ const AppLayout: React.FC = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "center"
+          alignItems: "center",
+          flexDirection: "column"
         }}
       >
+        <div
+          style={{
+            marginBottom: 15
+          }}
+        >
+          <Button onClick={() => dispatch(clearInventoryAction)}>Reset</Button>
+        </div>
         <ItemComponentPicker></ItemComponentPicker>
       </div>
     </main>
