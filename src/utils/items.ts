@@ -1,30 +1,4 @@
-interface ItemComponent {
-  id: ItemComponentId;
-  label: string;
-  buildsInto: Set<ItemFinishedId>;
-  itemType: ItemType.COMPONENT;
-  stats: ItemStats;
-  gridIndex: number;
-}
-
-interface ItemFinished {
-  id: ItemFinishedId;
-  name: string;
-  buildsFrom: Array<[ItemComponentId, ItemComponentId]>;
-  itemType: ItemType.FINISHED;
-  description: string;
-  stats: ItemStats;
-}
-
-interface ItemStats {
-  attackDamage: number;
-  armor: number;
-  magicResist: number;
-  spellDamage: number;
-  attackSpeed: number;
-  mana: number;
-  health: number;
-}
+import { ItemComponent, ItemFinished } from "types";
 
 export enum ItemType {
   COMPONENT = 0,
@@ -533,7 +507,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.BLADE_OF_THE_RUINED_KING]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.BLADE_OF_THE_RUINED_KING,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.SPATULA]],
     description: "Wearer is also a Blademaster.",
     name: "Titanic Hydra",
     stats: {
@@ -590,7 +564,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.IONIC_SPARK,
     buildsFrom: [
-      [ItemComponentId.CHAIN_VEST, ItemComponentId.NEEDLESSLY_LARGE_ROD]
+      [ItemComponentId.NEGATRON_CLOAK, ItemComponentId.NEEDLESSLY_LARGE_ROD]
     ],
     description:
       "Enemies take 200 true damage whenever they cast their Special Ability.",
@@ -788,7 +762,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.FORCE_OF_NATURE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.FORCE_OF_NATURE,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.SPATULA]],
     description: "Increases the number of champion slots by 1.",
     name: "Force of Nature",
     stats: {
@@ -936,7 +910,7 @@ interface FinishedItemPossiblity {
 }
 
 /** Assume finished items build only from two components. */
-const getPossibleCompletedItemsFromSingleComponents = (
+export const getPossibleCompletedItemsFromSingleComponent = (
   itemComponent: ItemComponentId
 ): FinishedItemPossiblity[] => {
   return FINISHED_ITEMS_MASTER_LIST.filter(finishedItem =>
@@ -959,7 +933,7 @@ const getPossibleCompletedItemsFromSingleComponents = (
 
 export const FINISHED_ITEMS_MASTER_RECORD_KEYED_BY_COMPONENT = ITEM_COMPONENTS_MASTER_LIST.reduce(
   (acc, cur) => {
-    acc[cur.id] = getPossibleCompletedItemsFromSingleComponents(cur.id);
+    acc[cur.id] = getPossibleCompletedItemsFromSingleComponent(cur.id);
 
     return acc;
   },
