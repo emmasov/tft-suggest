@@ -77,6 +77,7 @@ const ResultantRow: React.FC<{
     <div>
       <ItemIcon
         grayedOut
+        disabled
         shouldShowItemCount={false}
         itemComponentId={props.itemComponent}
         htmlProps={{

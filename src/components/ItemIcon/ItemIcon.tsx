@@ -73,13 +73,14 @@ export const ItemIcon: React.FC<
 
     const shouldBeGrayedOut = props.grayedOut || !requiredComponentsInInventory;
 
-    return (
+    const FinishedItemIcon = (
       <IconButtonBase
         {...props}
         grayedOut={shouldBeGrayedOut}
         backgroundImage={`url(${
           ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
         })`}
+        disabled={!requiredComponentsInInventory}
         shouldShowItemCount={
           props.shouldShowItemCount === undefined
             ? countOfItemInInventory
@@ -99,6 +100,8 @@ export const ItemIcon: React.FC<
         }}
       ></IconButtonBase>
     );
+
+    return FinishedItemIcon;
   }
 
   const countOfItemInInventory =
@@ -136,6 +139,7 @@ interface IconBaseProps {
 }
 
 const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
+  const [isHovering, setIsHovering] = React.useState(false);
   return (
     <button
       className={"ItemIcon"}
@@ -147,7 +151,14 @@ const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
         opacity: props.grayedOut ? 0.5 : 1,
         ...(props.htmlProps ? props.htmlProps.style : {})
       }}
+      onMouseEnter={() => {
+        setIsHovering(true);
+      }}
+      onMouseLeave={() => {
+        setIsHovering(false);
+      }}
     >
+      {isHovering && !props.disabled}
       {props.shouldShowItemCount && (
         <ItemCountDisplay
           count={props.countOfItemInInventory || 0}
