@@ -16,7 +16,6 @@ import InventoryProvider, {
 const AppLayout: React.FC = () => {
   const [state] = useInventory();
 
-  console.log(state);
   return (
     <main>
       <h1 style={{ textAlign: "center" }}>TFT Combinatorics</h1>

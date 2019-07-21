@@ -12,8 +12,6 @@ import { createAddItemToInventoryAction } from "components/InventoryProvider/red
 
 const SPACE_BETWEEN_COMPONENTS_AND_FINISHED_ITEMS = 15;
 
-const NUMBER_OF_COLUMNS = ITEM_COMPONENTS_MASTER_LIST.length + 1;
-
 const ItemComponentPicker: React.FC = () => {
   return (
     <div
@@ -23,12 +21,16 @@ const ItemComponentPicker: React.FC = () => {
       }}
     >
       <div className="ItemComponentPicker-ColumnLayout">
-        {ITEM_COMPONENTS_MASTER_LIST.map(item => {
+        <ComponentRow />
+        {ITEM_COMPONENTS_MASTER_LIST.map((item, index) => {
           return (
-            <ResultantRow itemComponent={item.id} key={item.id}></ResultantRow>
+            <ResultantRow
+              itemComponent={item.id}
+              key={item.id}
+              rowIndex={index}
+            ></ResultantRow>
           );
         })}
-        <ComponentRow />
       </div>
     </div>
   );
@@ -73,12 +75,16 @@ const ComponentRow: React.FC = () => {
   );
 };
 
-const ResultantRow: React.FC<{ itemComponent: ItemComponentId }> = props => {
+const ResultantRow: React.FC<{
+  itemComponent: ItemComponentId;
+  rowIndex: number;
+}> = props => {
   const [_, inventoryDispatch] = useInventory();
 
   return (
     <div>
       <ItemIcon
+        grayedOut
         itemComponentId={props.itemComponent}
         htmlProps={{
           style: {
@@ -94,12 +100,18 @@ const ResultantRow: React.FC<{ itemComponent: ItemComponentId }> = props => {
           )
         }
       ></ItemIcon>
-      {ITEM_COMPONENTS_MASTER_LIST.map(itemForCurrentColumn => {
+      {ITEM_COMPONENTS_MASTER_LIST.map((itemForCurrentColumn, index) => {
         const finishedItem = getCompletedItemFromComponents(
           props.itemComponent,
           itemForCurrentColumn.id
         );
-        return (
+
+        /** We want to avoid rendering an icon for a finished item if we've already rendered it */
+        const finishedIconAlreadyRendered = index < props.rowIndex;
+
+        return finishedIconAlreadyRendered ? (
+          <ItemIcon isBlank></ItemIcon>
+        ) : (
           <ItemIcon
             itemFinishedId={finishedItem}
             key={finishedItem}
