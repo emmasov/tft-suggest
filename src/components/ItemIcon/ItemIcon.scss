@@ -3,6 +3,7 @@
   height: 64px;
   width: 64px;
   position: relative;
+  background-size: contain;
 }
 
 .ItemCountDisplay {
@@ -16,4 +17,40 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .ItemIcon {
+    height: 48px;
+    width: 48px;
+  }
+
+  .ItemCountDisplay {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ItemIcon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .ItemCountDisplay {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+@media (max-width: 450px) {
+  .ItemIcon {
+    height: 30px;
+    width: 30px;
+  }
+
+  .ItemCountDisplay {
+    height: 10px;
+    width: 10px;
+  }
 }
