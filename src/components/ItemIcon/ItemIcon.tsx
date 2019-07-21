@@ -1,5 +1,11 @@
 import * as React from "react";
-import { ItemComponentId, ItemFinishedId } from "utils/items";
+import {
+  ItemComponentId,
+  ItemFinishedId,
+  FINISHED_ITEMS_MASTER_LIST,
+  FINISHED_ITEMS_MASTER_RECORD,
+  canBuildFinishedItem
+} from "utils/items";
 import { buildPublicUrl } from "utils/misc";
 import {
   ITEM_FINISHED_ID_TO_ICON_MAP,
@@ -61,12 +67,26 @@ export const ItemIcon: React.FC<
     const countOfItemInInventory =
       inventoryState.finishedItemsInInventory[props.itemFinishedId];
 
+    const requiredComponentsInInventory = canBuildFinishedItem(
+      inventoryState.itemComponentsInInventory,
+      props.itemFinishedId
+    );
+
+    const shouldBeGrayedOut =
+      props.grayedOut ||
+      (!requiredComponentsInInventory && !countOfItemInInventory);
+
     return (
       <button
         className={"ItemIcon"}
         {...props.htmlProps}
+        disabled={shouldBeGrayedOut || !requiredComponentsInInventory}
         onClick={() => {
-          if (props.onItemFinishedClick && props.itemFinishedId) {
+          if (
+            props.onItemFinishedClick &&
+            props.itemFinishedId &&
+            requiredComponentsInInventory
+          ) {
             props.onItemFinishedClick!(props.itemFinishedId);
           }
         }}
@@ -74,13 +94,12 @@ export const ItemIcon: React.FC<
           backgroundImage: `url(${
             ITEM_FINISHED_ID_TO_ICON_MAP[props.itemFinishedId]
           })`,
+          opacity: shouldBeGrayedOut ? 0.5 : 1,
           ...(props.htmlProps ? props.htmlProps.style : {})
         }}
       >
-        {shouldShowItemCount && !props.grayedOut && (
-          <ItemCountDisplay
-            count={countOfItemInInventory || 0}
-          ></ItemCountDisplay>
+        {shouldShowItemCount && !shouldBeGrayedOut && (
+          <ItemCountDisplay count={countOfItemInInventory}></ItemCountDisplay>
         )}
       </button>
     );
@@ -117,13 +136,17 @@ export const ItemIcon: React.FC<
 };
 
 interface ItemCountDisplayProps {
-  count: number;
+  count: number | undefined;
 }
 
 const ItemCountDisplay: React.FC<ItemCountDisplayProps> = props => {
+  if (props.count === undefined) {
+    return null;
+  }
+
   return (
     <div className={"ItemCountDisplay"}>
-      <span>{props.count}</span>
+      <span className="GLOBAL--disable-selection">{props.count}</span>
     </div>
   );
 };

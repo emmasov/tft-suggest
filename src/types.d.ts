@@ -17,7 +17,7 @@ export interface ItemComponent {
 export interface ItemFinished {
   id: ItemFinishedId;
   name: string;
-  buildsFrom: Array<[ItemComponentId, ItemComponentId]>;
+  buildsFrom: [ItemComponentId, ItemComponentId];
   itemType: ItemType.FINISHED;
   description: string;
   stats: ItemStats;

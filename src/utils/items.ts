@@ -268,7 +268,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.INFINITY_EDGE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.INFINITY_EDGE,
-    buildsFrom: [[ItemComponentId.BF_SWORD, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.BF_SWORD, ItemComponentId.BF_SWORD],
     description: "Critical strikes deal 300% damage instead of 150%.",
     name: "Infinity Edge",
     stats: {
@@ -284,7 +284,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.SWORD_OF_THE_DIVINE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.SWORD_OF_THE_DIVINE,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.BF_SWORD],
     description: "Critical strikes deal 300% damage instead of 150%.",
     name: "Sword of the Divine",
     stats: {
@@ -301,7 +301,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.HEXTECH_GUNBLADE,
     buildsFrom: [
-      [ItemComponentId.NEEDLESSLY_LARGE_ROD, ItemComponentId.BF_SWORD]
+      ItemComponentId.NEEDLESSLY_LARGE_ROD,
+      ItemComponentId.BF_SWORD
     ],
     description:
       "Heal for 25% of damage dealth. Does not heal for damage dealt by items.",
@@ -319,9 +320,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.SPEAR_OF_SHOJIN]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.SPEAR_OF_SHOJIN,
-    buildsFrom: [
-      [ItemComponentId.TEAR_OF_THE_GODDESS, ItemComponentId.BF_SWORD]
-    ],
+    buildsFrom: [ItemComponentId.TEAR_OF_THE_GODDESS, ItemComponentId.BF_SWORD],
     description:
       "After casting Special Ability for the first time, basic attacks restore an additional 15% of maximum mana on hit.",
     name: "Spear of Shojin",
@@ -338,7 +337,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.GUARDIAN_ANGEL]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.GUARDIAN_ANGEL,
-    buildsFrom: [[ItemComponentId.CHAIN_VEST, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.CHAIN_VEST, ItemComponentId.BF_SWORD],
     description:
       "Upon death, clears Grievous Wounds and revives after 2 seconds with 1000 health.",
     name: "Guardian Angel",
@@ -355,7 +354,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.BLOODTHIRSTER]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.BLOODTHIRSTER,
-    buildsFrom: [[ItemComponentId.NEGATRON_CLOAK, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.NEGATRON_CLOAK, ItemComponentId.BF_SWORD],
     description: "Heal for 50% of damage dealth by basic attacks.",
     name: "Bloodthirster",
     stats: {
@@ -371,7 +370,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.ZEKES_HERALD]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.ZEKES_HERALD,
-    buildsFrom: [[ItemComponentId.GIANTS_BELT, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.GIANTS_BELT, ItemComponentId.BF_SWORD],
     description:
       "At the beginning of combat the wearer and the champiopns two spaces to the left and right of the wearer gain 15% attack speed.",
     name: "Bloodthirster",
@@ -388,7 +387,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.YOUMUUS_GHOSTBLADE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.YOUMUUS_GHOSTBLADE,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.BF_SWORD]],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.BF_SWORD],
     description: "Wearer is also an Assassin.",
     name: "Youmuus Ghostblade",
     stats: {
@@ -404,7 +403,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.RAPID_FIRE_CANNON]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.RAPID_FIRE_CANNON,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.RECURVE_BOW]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.RECURVE_BOW],
     description: "Wearer is also an Assassin.",
     name: "Youmuus Ghostblade",
     stats: {
@@ -421,7 +420,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.GUINSOOS_RAGE_BLADE,
     buildsFrom: [
-      [ItemComponentId.RECURVE_BOW, ItemComponentId.NEEDLESSLY_LARGE_ROD]
+      ItemComponentId.RECURVE_BOW,
+      ItemComponentId.NEEDLESSLY_LARGE_ROD
     ],
     description: "Wearer is also an Assassin.",
     name: "Youmuus Ghostblade",
@@ -439,7 +439,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.STATIKK_SHIV,
     buildsFrom: [
-      [ItemComponentId.RECURVE_BOW, ItemComponentId.TEAR_OF_THE_GODDESS]
+      ItemComponentId.RECURVE_BOW,
+      ItemComponentId.TEAR_OF_THE_GODDESS
     ],
     description:
       "Every third basic attack deals 100 magic damage to the target and 3 additional targets.",
@@ -457,7 +458,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.PHANTOM_DANCER]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.PHANTOM_DANCER,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.CHAIN_VEST]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.CHAIN_VEST],
     description: "Dodge all critical strikes.",
     name: "Phantom Dancer",
     stats: {
@@ -473,7 +474,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.CURSED_BLADE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.CURSED_BLADE,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.NEGATRON_CLOAK]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.NEGATRON_CLOAK],
     description:
       "Basic attacks have a 20% chance to shrink the target, removing 1 star.",
     name: "Cursed Blade",
@@ -490,7 +491,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.TITANIC_HYDRA]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.TITANIC_HYDRA,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.GIANTS_BELT],
     description:
       "Basic attacks deal 10% of your maximum health bonus damage to the target and all adjacent enemies.",
     name: "Titanic Hydra",
@@ -507,7 +508,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.BLADE_OF_THE_RUINED_KING]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.BLADE_OF_THE_RUINED_KING,
-    buildsFrom: [[ItemComponentId.RECURVE_BOW, ItemComponentId.SPATULA]],
+    buildsFrom: [ItemComponentId.RECURVE_BOW, ItemComponentId.SPATULA],
     description: "Wearer is also a Blademaster.",
     name: "Titanic Hydra",
     stats: {
@@ -524,10 +525,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.RABADONS_DEATHCAP,
     buildsFrom: [
-      [
-        ItemComponentId.NEEDLESSLY_LARGE_ROD,
-        ItemComponentId.NEEDLESSLY_LARGE_ROD
-      ]
+      ItemComponentId.NEEDLESSLY_LARGE_ROD,
+      ItemComponentId.NEEDLESSLY_LARGE_ROD
     ],
     description: "Increases ability power by 50%.",
     name: "Rabadon's Deathcap",
@@ -545,7 +544,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.LOCKET_OF_THE_IRON_SOLARI,
     buildsFrom: [
-      [ItemComponentId.CHAIN_VEST, ItemComponentId.NEEDLESSLY_LARGE_ROD]
+      ItemComponentId.CHAIN_VEST,
+      ItemComponentId.NEEDLESSLY_LARGE_ROD
     ],
     description:
       "At the beginning of combat, the wearer and the champions two spaces to the left and right of the wearer gain a 300 health shield.",
@@ -564,7 +564,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.IONIC_SPARK,
     buildsFrom: [
-      [ItemComponentId.NEGATRON_CLOAK, ItemComponentId.NEEDLESSLY_LARGE_ROD]
+      ItemComponentId.NEGATRON_CLOAK,
+      ItemComponentId.NEEDLESSLY_LARGE_ROD
     ],
     description:
       "Enemies take 200 true damage whenever they cast their Special Ability.",
@@ -583,7 +584,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.MORELLONOMICON,
     buildsFrom: [
-      [ItemComponentId.GIANTS_BELT, ItemComponentId.NEEDLESSLY_LARGE_ROD]
+      ItemComponentId.GIANTS_BELT,
+      ItemComponentId.NEEDLESSLY_LARGE_ROD
     ],
     description:
       "Special Ability applies a burn on the enemies hit for 3 seconds, dealing 3% of their maximum health as true damage each second and applying Grievous Wounds for the duration.",
@@ -601,9 +603,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.YUUMI]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.YUUMI,
-    buildsFrom: [
-      [ItemComponentId.NEEDLESSLY_LARGE_ROD, ItemComponentId.SPATULA]
-    ],
+    buildsFrom: [ItemComponentId.NEEDLESSLY_LARGE_ROD, ItemComponentId.SPATULA],
     description: "Wearer is also a Sorceror.",
     name: "Yuumi",
     stats: {
@@ -620,10 +620,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.LUDENS_ECHO,
     buildsFrom: [
-      [
-        ItemComponentId.NEEDLESSLY_LARGE_ROD,
-        ItemComponentId.TEAR_OF_THE_GODDESS
-      ]
+      ItemComponentId.NEEDLESSLY_LARGE_ROD,
+      ItemComponentId.TEAR_OF_THE_GODDESS
     ],
     description:
       "Special Abliity deals 200 magic damage to all adjacent enemies to target.",
@@ -642,7 +640,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.SERAPHS_EMBRACE,
     buildsFrom: [
-      [ItemComponentId.TEAR_OF_THE_GODDESS, ItemComponentId.TEAR_OF_THE_GODDESS]
+      ItemComponentId.TEAR_OF_THE_GODDESS,
+      ItemComponentId.TEAR_OF_THE_GODDESS
     ],
     description: "After casting Special Ability gain 20 mana.",
     name: "Seraph's Embrace",
@@ -660,7 +659,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.HUSH,
     buildsFrom: [
-      [ItemComponentId.TEAR_OF_THE_GODDESS, ItemComponentId.NEGATRON_CLOAK]
+      ItemComponentId.TEAR_OF_THE_GODDESS,
+      ItemComponentId.NEGATRON_CLOAK
     ],
     description: "Basic attacks have a 30% chance to silence the target.",
     name: "Hush",
@@ -678,7 +678,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.REDEMPTION,
     buildsFrom: [
-      [ItemComponentId.TEAR_OF_THE_GODDESS, ItemComponentId.GIANTS_BELT]
+      ItemComponentId.TEAR_OF_THE_GODDESS,
+      ItemComponentId.GIANTS_BELT
     ],
     description:
       "When reaching 25% of maximum health, creates a zone that, after a small delay, heals allies for 1000 health.",
@@ -696,9 +697,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.DARKIN]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.DARKIN,
-    buildsFrom: [
-      [ItemComponentId.SPATULA, ItemComponentId.TEAR_OF_THE_GODDESS]
-    ],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.TEAR_OF_THE_GODDESS],
     description: "Wearer is also a Demon.",
     name: "Darkin",
     stats: {
@@ -714,7 +713,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.KNIGHTS_VOW]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.KNIGHTS_VOW,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.CHAIN_VEST]],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.CHAIN_VEST],
     description: "Wearer is also a Knight.",
     name: "Knight's Vow",
     stats: {
@@ -730,7 +729,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.RUNAANS_HURRICANE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.RUNAANS_HURRICANE,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.NEGATRON_CLOAK]],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.NEGATRON_CLOAK],
     description: "Basic attacks hit one additional target for 25% damage.",
     name: "Runaan's Hurricane",
     stats: {
@@ -746,7 +745,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.FROZEN_MALLET]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.FROZEN_MALLET,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.GIANTS_BELT],
     description: "Wearer is also a Glacial",
     name: "Darkin",
     stats: {
@@ -762,7 +761,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.FORCE_OF_NATURE]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.FORCE_OF_NATURE,
-    buildsFrom: [[ItemComponentId.SPATULA, ItemComponentId.SPATULA]],
+    buildsFrom: [ItemComponentId.SPATULA, ItemComponentId.SPATULA],
     description: "Increases the number of champion slots by 1.",
     name: "Force of Nature",
     stats: {
@@ -778,7 +777,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.RED_BUFF]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.RED_BUFF,
-    buildsFrom: [[ItemComponentId.CHAIN_VEST, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [ItemComponentId.CHAIN_VEST, ItemComponentId.GIANTS_BELT],
     description:
       "Basic attacks apply a burn on targets for 5 seconds, dealing 2.5% of their maximum health as true damage each second and applying Grievous Wounds for the duration.",
     name: "Red Buff",
@@ -796,7 +795,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.DRAGONS_CLAW,
     buildsFrom: [
-      [ItemComponentId.NEGATRON_CLOAK, ItemComponentId.NEGATRON_CLOAK]
+      ItemComponentId.NEGATRON_CLOAK,
+      ItemComponentId.NEGATRON_CLOAK
     ],
     description: "Gain 83% resistance to magic damage.",
     name: "Dragon's Claw",
@@ -814,7 +814,8 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.FROZEN_HEART,
     buildsFrom: [
-      [ItemComponentId.CHAIN_VEST, ItemComponentId.TEAR_OF_THE_GODDESS]
+      ItemComponentId.CHAIN_VEST,
+      ItemComponentId.TEAR_OF_THE_GODDESS
     ],
     description: "Adjacent enemies have their attack speed reduced by 20%.",
     name: "Frozen Heart",
@@ -831,7 +832,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.THORNMAIL]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.THORNMAIL,
-    buildsFrom: [[ItemComponentId.CHAIN_VEST, ItemComponentId.CHAIN_VEST]],
+    buildsFrom: [ItemComponentId.CHAIN_VEST, ItemComponentId.CHAIN_VEST],
     description:
       "Reflect 100% of physical damage mitigated as true damage to the attacker.",
     name: "Thornmail",
@@ -848,7 +849,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.SWORD_BREAKER]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.SWORD_BREAKER,
-    buildsFrom: [[ItemComponentId.CHAIN_VEST, ItemComponentId.NEGATRON_CLOAK]],
+    buildsFrom: [ItemComponentId.CHAIN_VEST, ItemComponentId.NEGATRON_CLOAK],
     description: "Basic attacks have a 20% change to disarm the target.",
     name: "Sword Breaker",
     stats: {
@@ -864,7 +865,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.ZEPHYR]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.ZEPHYR,
-    buildsFrom: [[ItemComponentId.GIANTS_BELT, ItemComponentId.NEGATRON_CLOAK]],
+    buildsFrom: [ItemComponentId.GIANTS_BELT, ItemComponentId.NEGATRON_CLOAK],
     description:
       "At the start of combat, banishes the unit that mirrors the wearer's placement on the other side of the board for 5 seconds.",
     name: "Sword Breaker",
@@ -881,7 +882,7 @@ export const FINISHED_ITEMS_MASTER_RECORD: Record<
   [ItemFinishedId.WARMOGS_ARMOR]: {
     itemType: ItemType.FINISHED,
     id: ItemFinishedId.WARMOGS_ARMOR,
-    buildsFrom: [[ItemComponentId.GIANTS_BELT, ItemComponentId.GIANTS_BELT]],
+    buildsFrom: [ItemComponentId.GIANTS_BELT, ItemComponentId.GIANTS_BELT],
     description: "Regenerates 6% of missing health per second..",
     name: "Warmog's Armor",
     stats: {
@@ -914,18 +915,17 @@ export const getPossibleCompletedItemsFromSingleComponent = (
   itemComponent: ItemComponentId
 ): FinishedItemPossiblity[] => {
   return FINISHED_ITEMS_MASTER_LIST.filter(finishedItem =>
-    finishedItem.buildsFrom[0].includes(itemComponent)
+    finishedItem.buildsFrom.includes(itemComponent)
   ).map(
     (possibleFinishedItem): FinishedItemPossiblity => {
-      const indexOfItemComponent = possibleFinishedItem.buildsFrom[0].indexOf(
+      const indexOfItemComponent = possibleFinishedItem.buildsFrom.indexOf(
         itemComponent
       );
       const indexOfOtherIngredient = indexOfItemComponent === 0 ? 1 : 0;
 
       return {
         finishedItem: possibleFinishedItem.id,
-        otherIngredient:
-          possibleFinishedItem.buildsFrom[0][indexOfOtherIngredient]
+        otherIngredient: possibleFinishedItem.buildsFrom[indexOfOtherIngredient]
       };
     }
   );
@@ -985,4 +985,39 @@ export const removeItemFromInventory = <
     ...inventory,
     [itemToRemove]: Math.max(inventory[itemToRemove]! - 1, 0)
   };
+};
+
+export const findItemComplement = (
+  component: ItemComponentId,
+  buildsFrom: [ItemComponentId, ItemComponentId]
+) => {
+  if (buildsFrom[0] !== component && buildsFrom[1] !== component) {
+    throw new Error(
+      "Could not find a complement for this item because it is not contained in the `buildsFrom` array."
+    );
+  }
+
+  // Just return the other item in the tuple.
+  return buildsFrom[buildsFrom[0] === component ? 1 : 0];
+};
+
+export const canBuildFinishedItem = (
+  inventory: Inventory<ItemComponentId>,
+  targetItem: ItemFinishedId
+) => {
+  const [componentA, componentB] = FINISHED_ITEMS_MASTER_RECORD[
+    targetItem
+  ].buildsFrom;
+
+  /** Edge case: handle items that build from two of the same item */
+
+  if (componentA === componentB) {
+    return Number.isFinite(inventory[componentA]) && inventory[componentA] > 1;
+  }
+
+  return (
+    Number.isFinite(inventory[componentA]) &&
+    inventory[componentA] > 0 &&
+    (Number.isFinite(inventory[componentB]) && inventory[componentB])
+  );
 };

@@ -3,7 +3,8 @@ import {
   ItemComponentId,
   ItemFinishedId,
   addItemToInventory,
-  removeItemFromInventory
+  removeItemFromInventory,
+  FINISHED_ITEMS_MASTER_RECORD
 } from "utils/items";
 import { Inventory } from "types";
 
@@ -36,17 +37,6 @@ interface InventorySlots {
 
 export interface InventoryState extends InventorySlots {}
 
-const removeItem = (
-  inventorySlot: keyof InventorySlots,
-  item: ItemComponentId | ItemFinishedId
-): ActionRemoveItemFromInventory => {
-  return {
-    type: REMOVE_ITEM_FROM_INVENTORY,
-    inventorySlot,
-    item
-  };
-};
-
 export const initialInventoryState = {
   finishedItemsInInventory: {},
   itemComponentsInInventory: {}
@@ -55,11 +45,30 @@ export const initialInventoryState = {
 export const inventoryReducer = (
   state: InventoryState,
   action: InventoryAction
-) => {
+): InventoryState => {
   switch (action.type) {
     case ADD_ITEM_TO_INVENTORY:
+      /** When adding a finished item to the inventory, we need to remove its components */
+
+      const shouldRemoveComponents =
+        action.inventorySlot === "finishedItemsInInventory";
+
+      const itemsToRemove: ItemComponentId[] =
+        shouldRemoveComponents && FINISHED_ITEMS_MASTER_RECORD[action.item]
+          ? FINISHED_ITEMS_MASTER_RECORD[action.item].buildsFrom
+          : [];
+
+      const newComponentInventory = itemsToRemove.reduce<
+        Inventory<ItemComponentId>
+      >((acc, cur) => {
+        return removeItemFromInventory(acc, cur);
+      }, state.itemComponentsInInventory);
+
+      console.log(action.inventorySlot);
+
       return {
         ...state,
+        itemComponentsInInventory: { ...newComponentInventory },
         [action.inventorySlot]: addItemToInventory(
           state[action.inventorySlot],
           action.item

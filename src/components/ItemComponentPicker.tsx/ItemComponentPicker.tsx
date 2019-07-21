@@ -14,24 +14,17 @@ const SPACE_BETWEEN_COMPONENTS_AND_FINISHED_ITEMS = 15;
 
 const ItemComponentPicker: React.FC = () => {
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: "fit-content"
-      }}
-    >
-      <div className="ItemComponentPicker-ColumnLayout">
-        <ComponentRow />
-        {ITEM_COMPONENTS_MASTER_LIST.map((item, index) => {
-          return (
-            <ResultantRow
-              itemComponent={item.id}
-              key={item.id}
-              rowIndex={index}
-            ></ResultantRow>
-          );
-        })}
-      </div>
+    <div className="ItemComponentPicker-ColumnLayout">
+      <ComponentRow />
+      {ITEM_COMPONENTS_MASTER_LIST.map((item, index) => {
+        return (
+          <ResultantRow
+            itemComponent={item.id}
+            key={item.id}
+            rowIndex={index}
+          ></ResultantRow>
+        );
+      })}
     </div>
   );
 };
@@ -43,7 +36,6 @@ const ComponentRow: React.FC = () => {
     <div
       style={{
         marginBottom: SPACE_BETWEEN_COMPONENTS_AND_FINISHED_ITEMS,
-        marginTop: SPACE_BETWEEN_COMPONENTS_AND_FINISHED_ITEMS,
         height: "fit-content"
       }}
     >

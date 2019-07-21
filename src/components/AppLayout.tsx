@@ -19,7 +19,14 @@ const AppLayout: React.FC = () => {
   return (
     <main>
       <h1 style={{ textAlign: "center" }}>TFT Combinatorics</h1>
-      <ItemComponentPicker></ItemComponentPicker>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
+        <ItemComponentPicker></ItemComponentPicker>
+      </div>
     </main>
   );
 };
