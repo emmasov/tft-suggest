@@ -1,0 +1,19 @@
+.ItemIcon {
+  display: "inline-block";
+  height: 64px;
+  width: 64px;
+  position: relative;
+}
+
+.ItemCountDisplay {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  background: black;
+  color: yellow;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

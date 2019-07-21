@@ -1,14 +1,154 @@
 import {
   ITEM_COMPONENTS_MASTER_LIST,
-  getPossibleCompletedItemsFromSingleComponent
+  getPossibleCompletedItemsFromSingleComponent,
+  getCompletedItemFromComponents,
+  ItemComponentId,
+  ItemFinishedId
 } from "./items";
 
-describe.only("getPossibleCompletedItemsFromSingleComponent", () => {
+describe("getPossibleCompletedItemsFromSingleComponent", () => {
   test("every component corresponds to only eight other finished items", () => {
     ITEM_COMPONENTS_MASTER_LIST.forEach(component => {
       expect(
         getPossibleCompletedItemsFromSingleComponent(component.id)
       ).toHaveLength(8);
     });
+  });
+});
+
+describe.only("getCompletedItemFromComponents", () => {
+  test("BF Sword builds into the correct finished items", () => {
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.BF_SWORD
+      )
+    ).toEqual(ItemFinishedId.INFINITY_EDGE);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.NEGATRON_CLOAK
+      )
+    ).toEqual(ItemFinishedId.BLOODTHIRSTER);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.RECURVE_BOW
+      )
+    ).toEqual(ItemFinishedId.SWORD_OF_THE_DIVINE);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.TEAR_OF_THE_GODDESS
+      )
+    ).toEqual(ItemFinishedId.SPEAR_OF_SHOJIN);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.CHAIN_VEST
+      )
+    ).toEqual(ItemFinishedId.GUARDIAN_ANGEL);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.GIANTS_BELT
+      )
+    ).toEqual(ItemFinishedId.ZEKES_HERALD);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.BF_SWORD,
+        ItemComponentId.SPATULA
+      )
+    ).toEqual(ItemFinishedId.YOUMUUS_GHOSTBLADE);
+  });
+
+  test("Negatron Cloak builds into the correct finished items", () => {
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.BF_SWORD
+      )
+    ).toEqual(ItemFinishedId.BLOODTHIRSTER);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.NEGATRON_CLOAK
+      )
+    ).toEqual(ItemFinishedId.DRAGONS_CLAW);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.RECURVE_BOW
+      )
+    ).toEqual(ItemFinishedId.CURSED_BLADE);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.TEAR_OF_THE_GODDESS
+      )
+    ).toEqual(ItemFinishedId.HUSH);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.CHAIN_VEST
+      )
+    ).toEqual(ItemFinishedId.SWORD_BREAKER);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.GIANTS_BELT
+      )
+    ).toEqual(ItemFinishedId.ZEPHYR);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.SPATULA
+      )
+    ).toEqual(ItemFinishedId.RUNAANS_HURRICANE);
+  });
+
+  test("Recurve Bow builds into the correct finished items", () => {
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.BF_SWORD
+      )
+    ).toEqual(ItemFinishedId.BLOODTHIRSTER);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.NEGATRON_CLOAK
+      )
+    ).toEqual(ItemFinishedId.DRAGONS_CLAW);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.RECURVE_BOW
+      )
+    ).toEqual(ItemFinishedId.CURSED_BLADE);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.TEAR_OF_THE_GODDESS
+      )
+    ).toEqual(ItemFinishedId.HUSH);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.CHAIN_VEST
+      )
+    ).toEqual(ItemFinishedId.SWORD_BREAKER);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.GIANTS_BELT
+      )
+    ).toEqual(ItemFinishedId.ZEPHYR);
+    expect(
+      getCompletedItemFromComponents(
+        ItemComponentId.NEGATRON_CLOAK,
+        ItemComponentId.SPATULA
+      )
+    ).toEqual(ItemFinishedId.RUNAANS_HURRICANE);
   });
 });

@@ -1,34 +1,16 @@
 import * as React from "react";
-import { ItemComponentId } from "utils/items";
-import { generatePossibleCompletedItems } from "utils/suggestions";
+import { Inventory } from "types";
+import { ItemComponentId, ItemFinishedId } from "utils/items";
 import "./App.scss";
-import { ItemIcon } from "./ItemIcon/ItemIcon";
-import ItemComponentPicker from "./ItemComponentPicker.tsx/ItemComponentPicker";
+import AppLayout from "./AppLayout";
+import InventoryProvider from "./InventoryProvider/InventoryProvider";
 
-function App() {
-  const [
-    itemComponentsInInventory,
-    setItemComponentsInInventory
-  ] = React.useState<ItemComponentId[]>([]);
-
-  const possibleCompletedItems = generatePossibleCompletedItems(
-    itemComponentsInInventory
-  );
-
+const App: React.FC = () => {
   return (
-    <main>
-      <h1>TFT Combinatorics</h1>
-      {/* <ItemComponentSelect
-        selectedItems={itemComponentsInInventory}
-        onAddItemComponent={addedItemComponentId =>
-          setItemComponentsInInventory(prevSelections =>
-            prevSelections.concat(addedItemComponentId)
-          )
-        }
-      ></ItemComponentSelect> */}
-      <ItemComponentPicker></ItemComponentPicker>
-    </main>
+    <InventoryProvider>
+      <AppLayout></AppLayout>
+    </InventoryProvider>
   );
-}
+};
 
 export default App;

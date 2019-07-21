@@ -1,3 +1,5 @@
+import { ItemFinishedId } from "utils/items";
+
 export interface DropdownOption {
   id: ItemComponentId;
   label: string;
@@ -30,3 +32,7 @@ export interface ItemStats {
   mana: number;
   health: number;
 }
+
+export type Inventory<T extends ItemComponentId | ItemFinishedId> = Partial<
+  Record<T, number>
+>;

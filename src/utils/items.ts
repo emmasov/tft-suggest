@@ -1,4 +1,4 @@
-import { ItemComponent, ItemFinished } from "types";
+import { ItemComponent, ItemFinished, Inventory } from "types";
 
 export enum ItemType {
   COMPONENT = 0,
@@ -957,4 +957,32 @@ export const getCompletedItemFromComponents = (
   }
 
   return possibleFinishedItemWithSecondComponent.finishedItem;
+};
+
+export const addItemToInventory = <T extends ItemComponentId | ItemFinishedId>(
+  inventory: Inventory<T>,
+  itemToAdd: T
+): Inventory<T> => {
+  return {
+    ...inventory,
+    [itemToAdd]: inventory.hasOwnProperty(itemToAdd)
+      ? inventory[itemToAdd]! + 1
+      : 1
+  };
+};
+
+export const removeItemFromInventory = <
+  T extends ItemComponentId | ItemFinishedId
+>(
+  inventory: Inventory<T>,
+  itemToRemove: T
+): Inventory<T> => {
+  if (!inventory.hasOwnProperty(itemToRemove)) {
+    return inventory;
+  }
+
+  return {
+    ...inventory,
+    [itemToRemove]: Math.max(inventory[itemToRemove]! - 1, 0)
+  };
 };

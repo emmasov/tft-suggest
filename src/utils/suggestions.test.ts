@@ -1,7 +1,7 @@
 import { generatePossibleCompletedItems } from "./suggestions";
 import { ItemComponentId, ItemFinishedId } from "./items";
 
-describe("generatePossibleCompletedItems", () => {
+describe.skip("generatePossibleCompletedItems", () => {
   describe("simple combinations", () => {
     test("returns an empty array when given only one component", () => {
       expect(
