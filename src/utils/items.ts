@@ -902,7 +902,7 @@ export const FINISHED_ITEMS_MASTER_LIST = Object.values(
 
 export const ITEM_COMPONENTS_MASTER_LIST = Object.values(
   ITEM_COMPONENTS_MASTER_RECORD
-);
+).sort((a, b) => a.gridIndex - b.gridIndex);
 
 interface FinishedItemPossiblity {
   otherIngredient: ItemComponentId;
@@ -956,5 +956,5 @@ export const getCompletedItemFromComponents = (
     );
   }
 
-  return possibleFinishedItemWithSecondComponent;
+  return possibleFinishedItemWithSecondComponent.finishedItem;
 };

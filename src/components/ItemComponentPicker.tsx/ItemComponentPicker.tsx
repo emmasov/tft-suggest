@@ -3,10 +3,9 @@ import * as React from "react";
 import {
   ITEM_COMPONENTS_MASTER_LIST,
   ItemComponentId,
-  getPossibleCompletedItemsFromSingleComponent
+  getPossibleCompletedItemsFromSingleComponent,
+  getCompletedItemFromComponents
 } from "utils/items";
-import { makeRange } from "utils/arrays";
-import { ItemComponent } from "types";
 
 interface Props {}
 
@@ -15,16 +14,24 @@ const NUMBER_OF_COLUMNS = ITEM_COMPONENTS_MASTER_LIST.length + 1;
 const ItemComponentPicker: React.FC<Props> = ({}) => {
   return (
     <div
-      className="ItemComponentPicker-ColumnLayout"
       style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(${NUMBER_OF_COLUMNS}, 1fr)`
+        margin: "auto"
       }}
     >
-      <ComponentRow />
-      {ITEM_COMPONENTS_MASTER_LIST.map((el, row) => {
-        return <ResultantRow itemComponent={el.id} key={el.id}></ResultantRow>;
-      })}
+      <div
+        className="ItemComponentPicker-ColumnLayout"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${NUMBER_OF_COLUMNS}, 1fr)`
+        }}
+      >
+        <ComponentRow />
+        {ITEM_COMPONENTS_MASTER_LIST.map((el, row) => {
+          return (
+            <ResultantRow itemComponent={el.id} key={el.id}></ResultantRow>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -46,18 +53,16 @@ const ResultantRow: React.FC<{ itemComponent: ItemComponentId }> = props => {
     [props.itemComponent]
   );
 
-  const possibilities = memoizedFn(props.itemComponent);
-
   return (
     <>
       <ItemIcon itemComponentId={props.itemComponent}></ItemIcon>
-      {possibilities.map(possibility => {
-        return (
-          <ItemIcon
-            itemFinishedId={possibility.finishedItem}
-            key={possibility.finishedItem}
-          />
+      {ITEM_COMPONENTS_MASTER_LIST.map(itemForCurrentColumn => {
+        const finishedItem = getCompletedItemFromComponents(
+          props.itemComponent,
+          itemForCurrentColumn.id
         );
+
+        return <ItemIcon itemFinishedId={finishedItem} key={finishedItem} />;
       })}
     </>
   );
