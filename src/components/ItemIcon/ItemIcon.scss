@@ -20,12 +20,20 @@
   height: 24px;
   width: 24px;
   background: black;
-  color: yellow;
-  right: 0;
-  bottom: 0;
+
+  right: 1px;
+  bottom: 1px;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.8;
+}
+
+.ItemCountDisplay-Text {
+  color: yellowgreen;
+  &--negative {
+    color: yellow;
+  }
 }
 
 @media (max-width: 768px) {
@@ -36,8 +44,8 @@
 
   .ItemCountDisplay {
     font-size: 14px;
-    height: 18px;
-    width: 18px;
+    height: 26px;
+    width: 26x;
   }
 }
 
@@ -49,8 +57,6 @@
 
   .ItemCountDisplay {
     font-size: 12px;
-    height: 16px;
-    width: 16px;
   }
 }
 
@@ -61,7 +67,7 @@
   }
 
   .ItemCountDisplay {
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
   }
 }

@@ -211,8 +211,16 @@ const ItemCountDisplay: React.FC<ItemCountDisplayProps> = props => {
   }
 
   return (
-    <div className={"ItemCountDisplay"}>
-      <span className="GLOBAL--disable-selection">{props.count}</span>
+    <div className={classnames("ItemCountDisplay")}>
+      <span
+        className={classnames(
+          "ItemCountDisplay-Text",
+          props.count < 1 ? "ItemCountDisplay-Text--negative" : null,
+          "GLOBAL--disable-selection"
+        )}
+      >
+        {props.count}
+      </span>
     </div>
   );
 };

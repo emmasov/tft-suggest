@@ -13,7 +13,6 @@ import Layout from "./Layout/Layout";
 const AppLayout: React.FC = () => {
   const [state, dispatch] = useInventory();
 
-  console.log(state);
   return (
     <main>
       <Layout>
@@ -51,6 +50,7 @@ const AppLayout: React.FC = () => {
           <Button
             aria-label="Reset"
             onClick={() => dispatch(clearInventoryAction)}
+            disabled={state.inventoryHistory.length < 1}
           >
             Reset
           </Button>

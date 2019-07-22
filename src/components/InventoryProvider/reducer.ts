@@ -134,11 +134,11 @@ export const inventoryReducer = (
         )
       };
     case CLEAR_INVENTORY:
+      // We could optionally clear history here too, I guess. I wonder what's more intuitive to the user.
+
       return {
         ...initialInventoryState,
-        inventoryHistory: state.inventoryHistory.concat(
-          getInventorySlotsFromState(state)
-        )
+        inventoryHistory: []
       };
     case UNDO_LAST_INVENTORY_ACTION: {
       if (state.inventoryHistory.length < 1) {
