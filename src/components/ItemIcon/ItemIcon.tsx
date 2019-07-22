@@ -7,7 +7,8 @@ import * as React from "react";
 import {
   canBuildFinishedItem,
   ItemComponentId,
-  ItemFinishedId
+  ItemFinishedId,
+  ItemType
 } from "utils/items";
 import {
   ITEM_COMPONENT_ID_TO_ICON_MAP,
@@ -107,6 +108,7 @@ export const ItemIcon: React.FC<
             );
           }
         }}
+        variant={ItemType.FINISHED}
       ></IconButtonBase>
     );
 
@@ -141,7 +143,11 @@ export const ItemIcon: React.FC<
         }
       }}
       onRightClick={() => {
-        if (props.itemComponentId) {
+        if (
+          props.itemComponentId &&
+          countOfItemInInventory &&
+          countOfItemInInventory > 0
+        ) {
           inventoryDispatch(
             createRemoveItemFromInventoryAction(
               "itemComponentsInInventory",
@@ -150,6 +156,7 @@ export const ItemIcon: React.FC<
           );
         }
       }}
+      variant={ItemType.COMPONENT}
     ></IconButtonBase>
   );
 
@@ -160,7 +167,7 @@ interface IconBaseProps {
   disabled?: boolean;
   backgroundImage: string;
   countOfItemInInventory: number | undefined;
-
+  variant: ItemType;
   onClick: () => void;
   onRightClick?: () => void;
 }
@@ -195,6 +202,7 @@ const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
       {props.shouldShowItemCount && (
         <ItemCountDisplay
           count={props.countOfItemInInventory || 0}
+          variant={props.variant}
         ></ItemCountDisplay>
       )}
     </button>
@@ -203,6 +211,7 @@ const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
 
 interface ItemCountDisplayProps {
   count: number | undefined;
+  variant: ItemType;
 }
 
 const ItemCountDisplay: React.FC<ItemCountDisplayProps> = props => {
