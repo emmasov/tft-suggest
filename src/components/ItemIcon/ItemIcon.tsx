@@ -1,18 +1,20 @@
+import { useInventory } from "components/InventoryProvider/InventoryProvider";
+import {
+  createAddItemToInventoryAction,
+  createRemoveItemFromInventoryAction
+} from "components/InventoryProvider/reducer";
 import * as React from "react";
 import {
+  canBuildFinishedItem,
   ItemComponentId,
-  ItemFinishedId,
-  FINISHED_ITEMS_MASTER_LIST,
-  FINISHED_ITEMS_MASTER_RECORD,
-  canBuildFinishedItem
+  ItemFinishedId
 } from "utils/items";
-import { buildPublicUrl } from "utils/misc";
 import {
-  ITEM_FINISHED_ID_TO_ICON_MAP,
-  ITEM_COMPONENT_ID_TO_ICON_MAP
+  ITEM_COMPONENT_ID_TO_ICON_MAP,
+  ITEM_FINISHED_ID_TO_ICON_MAP
 } from "./constants";
-import { useInventory } from "components/InventoryProvider/InventoryProvider";
 import "./ItemIcon.scss";
+import classnames from "classnames";
 
 interface BaseProps {
   itemComponentId?: ItemComponentId;
@@ -25,13 +27,10 @@ interface BaseProps {
   disabled?: boolean;
   grayedOut?: boolean;
   shouldShowItemCount?: boolean;
-  onItemComponentClick?: (item: ItemComponentId) => void;
-  onItemFinishedClick?: (item: ItemFinishedId) => void;
 }
 
 interface ItemComponentProps extends BaseProps {
   itemComponentId: ItemComponentId;
-  onItemComponentClick: (item: ItemComponentId) => void;
 }
 
 interface BlankIconProps extends BaseProps {
@@ -89,8 +88,23 @@ export const ItemIcon: React.FC<
         }
         countOfItemInInventory={countOfItemInInventory}
         onClick={() => {
-          if (props.onItemFinishedClick && props.itemFinishedId) {
-            props.onItemFinishedClick!(props.itemFinishedId);
+          if (props.itemFinishedId) {
+            inventoryDispatch(
+              createAddItemToInventoryAction(
+                "finishedItemsInInventory",
+                props.itemFinishedId
+              )
+            );
+          }
+        }}
+        onRightClick={() => {
+          if (props.itemFinishedId) {
+            inventoryDispatch(
+              createRemoveItemFromInventoryAction(
+                "finishedItemsInInventory",
+                props.itemFinishedId
+              )
+            );
           }
         }}
       ></IconButtonBase>
@@ -102,7 +116,7 @@ export const ItemIcon: React.FC<
   const countOfItemInInventory =
     inventoryState.itemComponentsInInventory[props.itemComponentId];
 
-  return (
+  const ItemComponentIcon = (
     <IconButtonBase
       {...props}
       backgroundImage={`url(${
@@ -117,12 +131,29 @@ export const ItemIcon: React.FC<
       }
       countOfItemInInventory={countOfItemInInventory}
       onClick={() => {
-        if (props.onItemComponentClick && props.itemComponentId) {
-          props.onItemComponentClick!(props.itemComponentId);
+        if (props.itemComponentId) {
+          inventoryDispatch(
+            createAddItemToInventoryAction(
+              "itemComponentsInInventory",
+              props.itemComponentId
+            )
+          );
+        }
+      }}
+      onRightClick={() => {
+        if (props.itemComponentId) {
+          inventoryDispatch(
+            createRemoveItemFromInventoryAction(
+              "itemComponentsInInventory",
+              props.itemComponentId
+            )
+          );
         }
       }}
     ></IconButtonBase>
   );
+
+  return ItemComponentIcon;
 };
 
 interface IconBaseProps {
@@ -131,6 +162,7 @@ interface IconBaseProps {
   countOfItemInInventory: number | undefined;
 
   onClick: () => void;
+  onRightClick?: () => void;
 }
 
 const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
@@ -151,6 +183,12 @@ const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
       }}
       onMouseLeave={() => {
         setIsHovering(false);
+      }}
+      onContextMenu={ev => {
+        if (props.onRightClick) {
+          ev.preventDefault();
+          props.onRightClick();
+        }
       }}
     >
       {isHovering && !props.disabled}

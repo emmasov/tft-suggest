@@ -162,9 +162,13 @@ export const inventoryReducer = (
   }
 };
 
-export const createAddItemToInventoryAction = (
-  inventorySlot: keyof InventorySlots,
-  item: ItemComponentId | ItemFinishedId
+export const createAddItemToInventoryAction = <
+  T extends ItemComponentId | ItemFinishedId
+>(
+  inventorySlot: T extends ItemComponentId
+    ? "itemComponentsInInventory"
+    : "finishedItemsInInventory",
+  item: T
 ): ActionAddItemToInventory => {
   return {
     type: ADD_ITEM_TO_INVENTORY,
@@ -173,9 +177,13 @@ export const createAddItemToInventoryAction = (
   };
 };
 
-export const createRemoveItemFromInventoryAction = (
-  inventorySlot: keyof InventorySlots,
-  item: ItemComponentId | ItemFinishedId
+export const createRemoveItemFromInventoryAction = <
+  T extends ItemComponentId | ItemFinishedId
+>(
+  inventorySlot: T extends ItemComponentId
+    ? "itemComponentsInInventory"
+    : "finishedItemsInInventory",
+  item: T
 ): ActionRemoveItemFromInventory => {
   return {
     type: REMOVE_ITEM_FROM_INVENTORY,

@@ -30,8 +30,6 @@ const ItemComponentPicker: React.FC = () => {
 };
 
 const ComponentRow: React.FC = () => {
-  const [inventoryState, inventoryDispatch] = useInventory();
-
   return (
     <div
       style={{
@@ -48,20 +46,7 @@ const ComponentRow: React.FC = () => {
         }}
       ></ItemIcon>
       {ITEM_COMPONENTS_MASTER_LIST.map(el => {
-        return (
-          <ItemIcon
-            key={el.id}
-            itemComponentId={el.id}
-            onItemComponentClick={() =>
-              inventoryDispatch(
-                createAddItemToInventoryAction(
-                  "itemComponentsInInventory",
-                  el.id
-                )
-              )
-            }
-          ></ItemIcon>
-        );
+        return <ItemIcon key={el.id} itemComponentId={el.id}></ItemIcon>;
       })}
     </div>
   );
@@ -85,14 +70,6 @@ const ResultantRow: React.FC<{
             marginRight: SPACE_BETWEEN_COMPONENTS_AND_FINISHED_ITEMS
           }
         }}
-        onItemComponentClick={() =>
-          inventoryDispatch(
-            createAddItemToInventoryAction(
-              "itemComponentsInInventory",
-              props.itemComponent
-            )
-          )
-        }
       ></ItemIcon>
       {ITEM_COMPONENTS_MASTER_LIST.map((itemForCurrentColumn, index) => {
         const finishedItem = getCompletedItemFromComponents(
