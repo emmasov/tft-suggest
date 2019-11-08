@@ -70,7 +70,6 @@ export const ItemIcon: React.FC<
       inventoryState.itemComponentsInInventory,
       props.itemFinishedId
     );
-
     const shouldBeGrayedOut = props.grayedOut || !requiredComponentsInInventory;
 
     const FinishedItemIcon = (
@@ -88,24 +87,34 @@ export const ItemIcon: React.FC<
             : props.shouldShowItemCount
         }
         countOfItemInInventory={countOfItemInInventory}
-        onClick={() => {
-          if (props.itemFinishedId) {
-            inventoryDispatch(
-              createAddItemToInventoryAction(
-                "finishedItemsInInventory",
-                props.itemFinishedId
-              )
-            );
+        onClick={mouseEvent => {
+          mouseEvent.persist();
+          const numberOfItemsToAddItem = mouseEvent.shiftKey ? 5 : 1;
+          for (let i = 0; i < numberOfItemsToAddItem; i++) {
+            if (props.itemFinishedId) {
+              inventoryDispatch(
+                createAddItemToInventoryAction(
+                  "finishedItemsInInventory",
+                  props.itemFinishedId
+                )
+              );
+            }
           }
         }}
-        onRightClick={() => {
-          if (props.itemFinishedId) {
-            inventoryDispatch(
-              createRemoveItemFromInventoryAction(
-                "finishedItemsInInventory",
-                props.itemFinishedId
-              )
-            );
+        onRightClick={mouseEvent => {
+          mouseEvent.persist();
+
+          const numberOfItemsToRemoveItem = mouseEvent.shiftKey ? 5 : 1;
+
+          for (let i = 0; i < numberOfItemsToRemoveItem; i++) {
+            if (props.itemFinishedId) {
+              inventoryDispatch(
+                createRemoveItemFromInventoryAction(
+                  "finishedItemsInInventory",
+                  props.itemFinishedId
+                )
+              );
+            }
           }
         }}
         variant={ItemType.FINISHED}
@@ -168,8 +177,10 @@ interface IconBaseProps {
   backgroundImage: string;
   countOfItemInInventory: number | undefined;
   variant: ItemType;
-  onClick: () => void;
-  onRightClick?: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onRightClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
 }
 
 const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
@@ -194,7 +205,7 @@ const IconButtonBase: React.FC<BaseProps & IconBaseProps> = props => {
       onContextMenu={ev => {
         if (props.onRightClick) {
           ev.preventDefault();
-          props.onRightClick();
+          props.onRightClick(ev);
         }
       }}
     >
